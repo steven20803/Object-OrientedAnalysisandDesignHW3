@@ -3,36 +3,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import java.util.Iterator;
-
 public class Main {
-    public static class Tst{
-        public int i;
-        Tst(int i){
-            this.i = i;
-        }
-    }
     public static void main(String[] args) {
-        
-
-        // List<Tst> tsts = new ArrayList<>();
-        // tsts.add(new Tst(0));
-        // tsts.add(new Tst(1));
-        // tsts.add(new Tst(1));
-        // tsts.add(new Tst(2));
-
-        // Iterator<Tst> iterator0 = tsts.iterator();
-        // while(iterator0.hasNext()){
-        //     Tst tst = iterator0.next();
-        //     System.out.println("Iteration " + tst.i);
-        //     if(tst.i == 1)
-        //         iterator0.remove();
-        // }
-
-        // for(Tst tst : tsts){
-        //     System.out.println("Result: " + tst.i);
-        // }
-
+        // Construct objects
         List<Customer> customers = new ArrayList<>();
         customers.add(new Breezy("Emily"));
         customers.add(new Breezy("Lucas"));
@@ -48,47 +21,44 @@ public class Main {
         Store store = new Store();
         Random random = new Random();
 
-        for(int i = 0; i < 35; i++){
+        // Simulation
+        for (int day = 0; day < 35; day++) {
             Collections.shuffle(customers);
             store.shuffleVideo();
 
+            // Stop receiving. NumTry customers try to rent.
             int numTry = random.nextInt(customers.size()) + 1;
-            for(int j = 0; j < numTry; j++){
+            for (int i = 0; i < numTry; i++) {
                 int numVideo = store.getNumVideo();
-                if(numVideo == 0)
+                if (numVideo == 0) // The store has zero videos.
                     break;
 
-                if(customers.get(j).isHoarder() && numVideo < 3)
+                if (customers.get(i).getNumVideo() == 3) // Customers are allowed to have at most three videos.
                     continue;
 
-                store.rent(customers.get(j), i);
+                if (customers.get(i).isHoarder() && numVideo < 3) // The store has less than 3 videos, so a Hoarder will
+                                                                  // not arrive.
+                    continue;
+
+                store.rent(customers.get(i), day);
             }
 
-            List<Rental> rentals = store.getRentals();
-            for(Rental rental : rentals){
-                if(rental.getDay() == i){
+            // Stop renting, and start to recieve.
+            List<Rental> toReceive = new ArrayList<>();
+            for (Rental rental : store.getRentals()) {
+                if (rental.getDay() == day) {
                     rental.display();
-                    store.receive(rental);
+                    toReceive.add(rental);
                 }
             }
+
+            toReceive.forEach(store::receive);
         }
 
+        // Display result
+        System.out.print('\n');
         store.display();
         System.out.print('\n');
         store.displayRental();
-
-        // public void receive(int day){
-        //     Iterator<Rental> iterator = rentals.iterator();
-        //     while (iterator.hasNext()) {
-        //         Rental rental = iterator.next();
-        //         if(day == rental.getDay()){
-        //             List<Video> videos = rental.getVideos();
-        //             Customer customer = rental.getCustomer();
-        //             this.videos.addAll(videos);
-        //             customer.setNumVideo(customer.getNumVideo() - videos.size());
-        //             iterator.remove(); // 使用迭代器的 remove 方法安全删除
-        //         }
-        //     }
-        // }
     }
 }

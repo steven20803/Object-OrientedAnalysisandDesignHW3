@@ -1,5 +1,5 @@
 public class Drama extends Video {
-    Drama(String name){
+    Drama(String name) {
         super(name, 2);
     }
 }

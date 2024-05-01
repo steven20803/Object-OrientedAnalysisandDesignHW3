@@ -1,5 +1,5 @@
 public class Romance extends Video {
-    Romance(String name){
+    Romance(String name) {
         super(name, 3);
     }
 }

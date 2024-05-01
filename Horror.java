@@ -1,5 +1,5 @@
 public class Horror extends Video {
-    Horror(String name){
+    Horror(String name) {
         super(name, 3);
     }
 }

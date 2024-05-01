@@ -7,7 +7,7 @@ public class Rental {
     private int day;
     private int money;
 
-    Rental(Customer customer, List<Video> videos, int night, int day, int money){
+    Rental(Customer customer, List<Video> videos, int night, int day, int money) {
         this.customer = customer;
         this.videos = videos;
         this.night = night;
@@ -15,21 +15,21 @@ public class Rental {
         this.money = money;
     }
 
-    public Customer getCustomer(){
+    public Customer getCustomer() {
         return this.customer;
     }
 
-    public List<Video> getVideos(){
+    public List<Video> getVideos() {
         return this.videos;
     }
 
-    public int getDay(){
+    public int getDay() {
         return this.day;
     }
 
-    public void display(){
+    public void display() {
         System.out.print("Videos: ");
-        for(Video video : this.videos)
+        for (Video video : this.videos)
             System.out.print(video.getName() + ", ");
 
         System.out.print('\t');
