@@ -40,6 +40,9 @@ public class Store {
         List<Video> selectedVideos = new ArrayList<>(this.videos.subList(0, numRent));
         int money = 0;
 
+        if(numRent == 0) // Illegal (Hoarder case)
+            return;
+
         // Decrease inventory
         for (int i = 0; i < numRent; i++) {
             money += this.videos.get(0).getPrice() * night;

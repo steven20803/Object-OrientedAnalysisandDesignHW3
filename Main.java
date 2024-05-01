@@ -36,10 +36,6 @@ public class Main {
                 if (customers.get(i).getNumVideo() == 3) // Customers are allowed to have at most three videos.
                     continue;
 
-                if (customers.get(i).isHoarder() && numVideo < 3) // The store has less than 3 videos, so a Hoarder will
-                                                                  // not arrive.
-                    continue;
-
                 store.rent(customers.get(i), day);
             }
 

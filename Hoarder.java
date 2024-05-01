@@ -4,7 +4,11 @@ public class Hoarder extends Customer {
     }
 
     public int getNumRent(int storeVideo) {
-        return 3;
+        if(storeVideo < 3)
+            return 0;
+
+        else
+            return 3;
     }
 
     public int getNight() {
