@@ -79,9 +79,7 @@ public class Store {
 
         System.out.print('\n');
         System.out.println("Amount of money: " + this.money);
-    }
-
-    public void displayRental() {
+        System.out.print('\n');
         System.out.println("Active rentals:");
         for (Rental rental : this.rentals)
             rental.display();

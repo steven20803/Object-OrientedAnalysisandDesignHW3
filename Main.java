@@ -58,7 +58,5 @@ public class Main {
         // Display result
         System.out.print('\n');
         store.display();
-        System.out.print('\n');
-        store.displayRental();
     }
 }
